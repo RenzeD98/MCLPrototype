@@ -12,11 +12,17 @@
     <script src="https://js.pusher.com/4.4/pusher.min.js"></script>
 </head>
 <body>
-    <input type="button" value="1" onclick="setChannel(1)">
-    <input type="button" value="2" onclick="setChannel(2)">
-    <input type="button" value="3" onclick="setChannel(3)">
-    <input type="button" value="4" onclick="setChannel(4)">
 
+    <div class="settings">
+        <input type="button" value="1" onclick="setChannel(1)">
+        <input type="button" value="2" onclick="setChannel(2)">
+        <input type="button" value="3" onclick="setChannel(3)">
+        <input type="button" value="4" onclick="setChannel(4)">
+    </div>
+
+    <div class="inputButton">
+        <input type="button" value="click" onclick="returnInput()">
+    </div>
 
     <script>
 
@@ -32,8 +38,21 @@
 
             //listen to event
             channel.bind(id, function (data) {
+                //if channelgroup MCL_prototype is called with the selected channel id, then toggle input
+                // toggleInput();
+
                 alert('An event was triggered with message: ' + data.message);
             });
+        }
+
+        function toggleInput(){
+            //toggle the state of the inputButton
+
+        }
+
+        function returnInput() {
+            //return when the input button is clicked
+
         }
 
     </script>
