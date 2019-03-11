@@ -12,7 +12,6 @@
     <script src="https://js.pusher.com/4.4/pusher.min.js"></script>
 </head>
 <body>
-    <h3>Banaan</h3>
     <input type="button" value="1" onclick="setChannel(1)">
     <input type="button" value="2" onclick="setChannel(2)">
     <input type="button" value="3" onclick="setChannel(3)">

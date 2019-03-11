@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('push-client-update', 'PusherController@pushClientUpdate');
+Route::post('push-client-update', 'PusherController@pushInputPaneltUpdate');
 Route::post('start-session', 'PusherController@startSession');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

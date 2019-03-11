@@ -23,8 +23,8 @@
     </div>
     <hr>
     <div>
-        <label>Iteraties  </label><input class="iteration" type="number" value="5"><br>
-        <label>Interval  </label><input class="interval" type="number" value="3"><br>
+        <label>Iteraties  </label><input class="iteration" type="number" value="1"><br>
+        <label>Interval  </label><input class="interval" type="number" value="0"><br>
         <input type="button" value="start" onclick="startSession()">
     </div>
 

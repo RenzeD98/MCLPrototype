@@ -12,5 +12,4 @@
 */
 
 Route::get('/', 'PusherController@index');
-//Route::post('push-client-update', 'PusherController@pushClientUpdate');
 Route::get('banaan', 'ClientPageController@index');
