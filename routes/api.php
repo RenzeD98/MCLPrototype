@@ -13,9 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('push-client-update', 'PusherController@pushInputPaneltUpdate');
+Route::post('push-client-update', 'PusherController@pushInputPanelUpdate');
 Route::post('start-session', 'PusherController@startSession');
-Route::post('update-session', 'PusherController@receiveSesionUpdate');
+Route::post('update-session', 'PusherController@recieveSessionUpdate');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

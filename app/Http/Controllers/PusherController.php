@@ -11,7 +11,7 @@ class PusherController extends Controller
         return view('controlpanel');
     }
 
-    public function pushInputPaneltUpdate(Request $request){
+    public function pushInputPanelUpdate(Request $request){
 
         $message = 'red';
 
@@ -20,34 +20,37 @@ class PusherController extends Controller
 
     public function startSession(Request $request) {
         $iterations = $request->iterations;
-        $intval = $request->interval;
+        $interval = $request->interval;
         $i = 1;
 
-        $this->pushSessionUpdate($iterations, $intval, $i);
+        $this->sessionUpdate($iterations, $interval, $i);
     }
 
-    public function pushSessionUpdate($iterations, $intval, $i){
+    public function sessionUpdate($iterations, $interval, $i){
         if($i <= $iterations) {
             $channel = strval(rand(1, 4));
+
             $data = array(
                 'iterations' => $iterations,
-                'intval' => $intval,
+                'interval' => $interval,
                 'i' => $i
             );
 
             if ($i !== 1) {
-                sleep($intval);
+                sleep($interval);
             }
 
             Pusher::trigger('MCL_prototype', $channel, ['message' => json_encode($data)]);
         }
     }
 
-    public function receiveSesionUpdate(Request $request){
-        $iterations = $request->iterations;
-        $intval = $request->intval;
-        $i = $request->i + 1;
+    public function recieveSessionUpdate(Request $request){
+        // json decode request
 
-        $this->pushSessionUpdate($iterations, $intval, $i);
+//        $iterations = $request->iterations;
+//        $interval = $request->interval;
+//        $i = $request->i + 1;
+
+//        $this->sessionUpdate($iterations, $interval, $i);
     }
 }
