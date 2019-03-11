@@ -8,10 +8,17 @@ use Pusher\Laravel\Facades\Pusher;
 class PusherController extends Controller
 {
     public function index(){
-        $message = 'Pusher message';
+        return view('controlpanel');
+    }
 
-        Pusher::trigger('MCL_prototype', '1', ['message' => $message]);
+    public function pushClientUpdate(Request $request){
 
-//        return view('welcome');
+        $message = 'red';
+
+        Pusher::trigger('MCL_prototype', $request->id, ['message' => $message]);
+    }
+
+    public function startSession(Request $request) {
+
     }
 }
