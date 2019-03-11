@@ -12,4 +12,4 @@
 */
 
 Route::get('/', 'PusherController@index');
-Route::get('banaan', 'ClientPageController@index');
+Route::get('banaan', 'InputPageController@index');
