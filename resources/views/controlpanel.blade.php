@@ -37,7 +37,6 @@
             type: 'POST',
             url: url + '/api/push-client-update',
             data: {id: id},
-            dataType: 'JSON',
             success: function(){
                 console.log('verstuurd');
             }
@@ -55,7 +54,6 @@
                 iterations: iterations,
                 interval: interval
             },
-            dataType: 'JSON',
             success: function(){
                 console.log('verstuurd');
             }

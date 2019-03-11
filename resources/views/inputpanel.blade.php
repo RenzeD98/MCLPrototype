@@ -30,7 +30,8 @@
 
 <script>
 
-    var jsonData = null;
+    let jsonData = null;
+    const url = '{{ url('/') }}';
 
     function setChannel(id) {
         // open connection to channel
@@ -74,11 +75,11 @@
 
     function returnInput() {
         //return when the input button is clicked
+        console.log('click');
         $.ajax({
             type: 'POST',
             url: url + '/api/update-session',
             data: {data: jsonData},
-            dataType: 'JSON',
             success: function (data) {
                 toggleInput();
             }
