@@ -75,15 +75,15 @@
 
     function returnInput() {
         //return when the input button is clicked
-        console.log('click');
         $.ajax({
             type: 'POST',
             url: url + '/api/update-session',
-            data: {data: jsonData},
+            data: jsonData,
             success: function (data) {
-                toggleInput();
+                console.log('click');
             }
         });
+        toggleInput();
     }
 
 </script>

@@ -30,27 +30,28 @@ class PusherController extends Controller
         if($i <= $iterations) {
             $channel = strval(rand(1, 4));
 
-            $data = array(
+            $data = json_encode(array(
                 'iterations' => $iterations,
                 'interval' => $interval,
                 'i' => $i
-            );
+            ));
 
             if ($i !== 1) {
                 sleep($interval);
             }
 
-            Pusher::trigger('MCL_prototype', $channel, ['message' => json_encode($data)]);
+            Pusher::trigger('MCL_prototype', $channel, ['message' => $data]);
         }
     }
 
     public function recieveSessionUpdate(Request $request){
         // json decode request
+        $request = json_decode($request->getContent());
 
-//        $iterations = $request->iterations;
-//        $interval = $request->interval;
-//        $i = $request->i + 1;
+        $iterations = $request->iterations;
+        $interval = $request->interval;
+        $i = $request->i + 1;
 
-//        $this->sessionUpdate($iterations, $interval, $i);
+        $this->sessionUpdate($iterations, $interval, $i);
     }
 }
