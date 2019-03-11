@@ -28,21 +28,26 @@ class PusherController extends Controller
 
     public function pushSessionUpdate($iterations, $intval, $i){
         if($i <= $iterations) {
-            $message = 'message';
             $channel = strval(rand(1, 4));
+            $data = array(
+                'iterations' => $iterations,
+                'intval' => $intval,
+                'i' => $i
+            );
 
             if ($i !== 1) {
                 sleep($intval);
             }
 
-            Pusher::trigger('MCL_prototype', $channel, ['message' => $message]);
-
-            $i++;
-            $this->pushSessionUpdate($iterations, $intval, $i);
+            Pusher::trigger('MCL_prototype', $channel, ['message' => json_encode($data)]);
         }
     }
 
-    public function receiveSesionUpdate(){
+    public function receiveSesionUpdate(Request $request){
+        $iterations = $request->iterations;
+        $intval = $request->intval;
+        $i = $request->i + 1;
 
+        $this->pushSessionUpdate($iterations, $intval, $i);
     }
 }
