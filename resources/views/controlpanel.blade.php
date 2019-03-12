@@ -29,7 +29,9 @@
             <label>Interval</label>
             <input class="interval" type="number" value="0">
         </div>
-        <input class="btn btn-primary" id="startButton" type="button" value="start" onclick="startSession()">
+    </div>
+    <input class="btn btn-primary" id="startButton" type="button" value="start" onclick="startSession()">
+    <hr>
     <div>
         <h3>Times</h3>
         <ul class="laptimes"></ul>
