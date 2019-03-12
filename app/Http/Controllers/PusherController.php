@@ -21,19 +21,21 @@ class PusherController extends Controller
     public function startSession(Request $request) {
         $iterations = $request->iterations;
         $interval = $request->interval;
-        $i = 1;
+        $devices = $request->devices;
+        $i = 0;
 
-        $this->sessionUpdate($iterations, $interval, $i);
+        $this->sessionUpdate($iterations, $interval, $i, $devices);
     }
 
-    public function sessionUpdate($iterations, $interval, $i){
-        if($i <= $iterations) {
-            $channel = strval(rand(1, 4));
+    public function sessionUpdate($iterations, $interval, $i, $devices){
+        if($i < $iterations) {
+            $channel = strval(rand(1, $devices));
 
             $data = json_encode(array(
                 'iterations' => $iterations,
                 'interval' => $interval,
-                'i' => $i
+                'i' => $i,
+                'devices' => $devices
             ));
 
             if ($i !== 1) {
@@ -53,11 +55,12 @@ class PusherController extends Controller
         $iterations = $request->iterations;
         $interval = $request->interval;
         $i = $request->i + 1;
+        $devices = $request->devices;
         $laptime = $request->laptime;
 
         //send laptime to controlpanel
         Pusher::trigger('MCL_prototype', 'laptimes', ['laptime' => $laptime]);
 
-        $this->sessionUpdate($iterations, $interval, $i);
+        $this->sessionUpdate($iterations, $interval, $i, $devices);
     }
 }
