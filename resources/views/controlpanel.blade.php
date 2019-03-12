@@ -1,20 +1,7 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layout')
 
-    <title>Laravel</title>
+@section('content')
 
-    <!-- Scripts -->
-    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="https://js.pusher.com/4.4/pusher.min.js"></script>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-</head>
-<body>
     <h1>Control panel</h1>
     <div class="individual-buttons">
         <input type="button" value="1" onclick="sendUpdate(1)">
@@ -72,7 +59,7 @@
             }
         });
     }
-    
+
     function startSession() {
         console.log('startSession');
 
@@ -115,5 +102,5 @@
     }
 
 </script>
-</body>
-</html>
+    
+@endsection
