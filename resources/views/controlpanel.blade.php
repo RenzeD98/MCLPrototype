@@ -27,8 +27,6 @@
         <label>Interval  </label><input class="interval" type="number" value="0"><br>
         <input type="button" value="start" onclick="startSession()">
     </div>
-
-
 <script>
     var url = '{{ url('/') }}';
 

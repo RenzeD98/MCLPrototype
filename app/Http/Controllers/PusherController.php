@@ -28,7 +28,7 @@ class PusherController extends Controller
 
     public function sessionUpdate($iterations, $interval, $i){
         if($i <= $iterations) {
-            $channel = strval(rand(1, 4));
+            $channel = strval(rand(1, 1));
 
             $data = json_encode(array(
                 'iterations' => $iterations,
@@ -48,9 +48,13 @@ class PusherController extends Controller
         // json decode request
         $request = json_decode($request->getContent());
 
+
         $iterations = $request->iterations;
         $interval = $request->interval;
         $i = $request->i + 1;
+        $laptime = $request->laptime;
+
+        //send laptime to controlpanel
 
         $this->sessionUpdate($iterations, $interval, $i);
     }

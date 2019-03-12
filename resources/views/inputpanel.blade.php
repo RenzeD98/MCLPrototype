@@ -26,6 +26,18 @@
 
 <div class="inputButtonContainer" style="display: none">
     <input disabled id="inputButton" type="button" value="click" onclick="returnInput()">
+
+    <nav class="controls">
+        <a href="#" class="button" onClick="stopwatch.start();">Start</a>
+        <a href="#" class="button" onClick="stopwatch.lap();">Lap</a>
+        <a href="#" class="button" onClick="stopwatch.stop();">Stop</a>
+        <a href="#" class="button" onClick="stopwatch.restart();">Restart</a>
+        <a href="#" class="button" onClick="stopwatch.clear();">Clear Laps</a>
+    </nav>
+    <div class="stopwatch"></div>
+    <ul class="results"></ul>
+
+    <script src="{{ URL::asset('js/timer.js') }}"></script>
 </div>
 
 <script>
@@ -56,17 +68,18 @@
             //if channelgroup MCL_prototype is called with the selected channel id, then toggle input
             jsonData = data.message;
             toggleInput();
-
-            // alert('An event was triggered with message: ' + data.message);
         });
     }
 
     function toggleInput() {
         //toggle the state of the inputButton
-        var inputButton = $('#inputButton');
+        let inputButton = $('#inputButton');
         if (inputButton.prop('disabled')) {
             inputButton.prop('disabled', false);
             inputButton.css('background-color', 'green');
+
+            //start timer
+            stopwatch.start();
         } else {
             inputButton.prop('disabled', true);
             inputButton.css('background-color', 'red');
@@ -74,6 +87,14 @@
     }
 
     function returnInput() {
+        stopwatch.stop();
+        let laptime = stopwatch.lap();
+        stopwatch.clear();
+
+        jsonData = JSON.parse(jsonData);
+        jsonData['laptime'] = laptime;
+        jsonData = JSON.stringify(jsonData);
+
         //return when the input button is clicked
         $.ajax({
             type: 'POST',
