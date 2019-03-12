@@ -9,6 +9,7 @@
 
     <!-- Scripts -->
     <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://js.pusher.com/4.4/pusher.min.js"></script>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -25,12 +26,12 @@
     <div>
         <label>Iteraties  </label><input class="iteration" type="number" value="1"><br>
         <label>Interval  </label><input class="interval" type="number" value="0"><br>
-        <input type="button" value="start" onclick="startSession()">
+        <input id="startButton" type="button" value="start" onclick="startSession()">
     </div>
 
 
 <script>
-    var url = '{{ url('/') }}';
+    const url = '{{ url('/') }}';
 
     function sendUpdate(id) {
         $.ajax({
@@ -44,8 +45,11 @@
     }
     
     function startSession() {
-        var iterations = $('.iteration').val();
-        var interval = $('.interval').val();
+        let iterations = $('.iteration').val();
+        let interval = $('.interval').val();
+
+        toggleStartButton();
+        startButtonManager();
 
         $.ajax({
             type: 'POST',
@@ -58,6 +62,33 @@
                 console.log('verstuurd');
             }
         });
+    }
+
+    function startButtonManager() {
+        // open connection to channel
+        let pusher = new Pusher('298ef029374f89470d24', {
+            cluster: 'eu'
+        });
+
+        //subscribe to a channel
+        let channel = pusher.subscribe('MCL_prototype');
+
+        //listen to event
+        channel.bind('toggleStartButton', function (data) {
+            //if channelgroup MCL_prototype is called with the selected channel id, then toggle input
+            toggleStartButton();
+
+            // alert('An event was triggered with message: ' + data.message);
+        });
+    }
+
+    function toggleStartButton() {
+        let buttons = $(':button');
+        if (buttons.prop('disabled')) {
+            buttons.prop('disabled', false);
+        } else {
+            buttons.prop('disabled', true);
+        }
     }
 
 </script>
