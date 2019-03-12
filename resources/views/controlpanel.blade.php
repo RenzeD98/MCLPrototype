@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <h1>Controllpanel</h1>
+    <h1>Control panel</h1>
     <div class="individual-buttons">
         <input type="button" value="1" onclick="sendUpdate(1)">
         <input type="button" value="2" onclick="sendUpdate(2)">
@@ -99,7 +99,7 @@
 
     function appendLapTime(laptime) {
         let li = document.createElement('li');
-        li.innerText = laptime
+        li.innerText = laptime;
         $('.laptimes').append(li);
     }
 
