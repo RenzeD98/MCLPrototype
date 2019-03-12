@@ -47,17 +47,11 @@
         $('.settings').toggle();
         $('.inputButtonContainer').toggle();
 
-        // document.getElementsByClassName("settings").style.display = "none";
-        // document.getElementById("inputButton").style.display = "block";
-
-
         //listen to event
         channel.bind(id, function (data) {
             //if channelgroup MCL_prototype is called with the selected channel id, then toggle input
             jsonData = data.message;
             toggleInput();
-
-            // alert('An event was triggered with message: ' + data.message);
         });
     }
 

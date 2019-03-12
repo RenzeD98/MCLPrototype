@@ -33,6 +33,19 @@
 <script>
     const url = '{{ url('/') }}';
 
+    // open connection to channel
+    let pusher = new Pusher('298ef029374f89470d24', {
+        cluster: 'eu'
+    });
+
+    //subscribe to a channel
+    let channel = pusher.subscribe('MCL_prototype');
+
+    //listen to event
+    channel.bind('toggleStartButton', function (data) {
+        enableButtons();
+    });
+
     function sendUpdate(id) {
         $.ajax({
             type: 'POST',
@@ -45,11 +58,11 @@
     }
     
     function startSession() {
+        console.log('startSession');
         let iterations = $('.iteration').val();
         let interval = $('.interval').val();
 
-        toggleStartButton();
-        startButtonManager();
+        disableButtons();
 
         $.ajax({
             type: 'POST',
@@ -64,31 +77,14 @@
         });
     }
 
-    function startButtonManager() {
-        // open connection to channel
-        let pusher = new Pusher('298ef029374f89470d24', {
-            cluster: 'eu'
-        });
-
-        //subscribe to a channel
-        let channel = pusher.subscribe('MCL_prototype');
-
-        //listen to event
-        channel.bind('toggleStartButton', function (data) {
-            //if channelgroup MCL_prototype is called with the selected channel id, then toggle input
-            toggleStartButton();
-
-            // alert('An event was triggered with message: ' + data.message);
-        });
+    function disableButtons() {
+        let buttons = $(':button');
+        buttons.prop('disabled', true);
     }
 
-    function toggleStartButton() {
+    function enableButtons() {
         let buttons = $(':button');
-        if (buttons.prop('disabled')) {
-            buttons.prop('disabled', false);
-        } else {
-            buttons.prop('disabled', true);
-        }
+        buttons.prop('disabled', false);
     }
 
 </script>

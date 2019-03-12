@@ -42,7 +42,7 @@ class PusherController extends Controller
 
             Pusher::trigger('MCL_prototype', $channel, ['message' => $data]);
         } else {
-            Pusher::trigger('MCL_prototype', 'toggleStartButton', ['message' => true]);
+            Pusher::trigger('MCL_prototype', 'toggleStartButton', ['message' => 'oh hallo']);
         }
     }
 
