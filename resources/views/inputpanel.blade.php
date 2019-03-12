@@ -9,22 +9,11 @@
         <input type="button" value="4" onclick="setChannel(4)">
     </div>
 
-    <div class="inputButtonContainer" style="display: none">
-        <input disabled id="inputButton" type="button" value="click" onclick="returnInput()">
-
-        <nav class="controls">
-            <a href="#" class="button" onClick="stopwatch.start();">Start</a>
-            <a href="#" class="button" onClick="stopwatch.lap();">Lap</a>
-            <a href="#" class="button" onClick="stopwatch.stop();">Stop</a>
-            <a href="#" class="button" onClick="stopwatch.restart();">Restart</a>
-            <a href="#" class="button" onClick="stopwatch.clear();">Clear Laps</a>
-        </nav>
+    <button disabled id="inputButton" class="inputButtonContainer redBackground" style="display: none" onclick="returnInput()">
         <div class="stopwatch"></div>
-        <ul class="results"></ul>
+    </button>
 
-        <script src="{{ URL::asset('js/timer.js') }}"></script>
-    </div>
-
+    <script src="{{ URL::asset('js/timer.js') }}"></script>
     <script>
 
         let jsonData = null;
@@ -57,13 +46,16 @@
             let inputButton = $('#inputButton');
             if (inputButton.prop('disabled')) {
                 inputButton.prop('disabled', false);
-                inputButton.css('background-color', 'green');
+
+                inputButton.addClass("greenBackground");
+                inputButton.removeClass("redBackground");
 
                 //start timer
                 stopwatch.start();
             } else {
                 inputButton.prop('disabled', true);
-                inputButton.css('background-color', 'red');
+                inputButton.addClass("redBackground");
+                inputButton.removeClass("greenBackground");
             }
         }
 
@@ -72,19 +64,22 @@
             let laptime = stopwatch.lap();
             stopwatch.reset();
 
-            jsonData = JSON.parse(jsonData);
-            jsonData['laptime'] = laptime;
-            jsonData = JSON.stringify(jsonData);
+            if (jsonData !== 'red') {
+                jsonData = JSON.parse(jsonData);
+                jsonData['laptime'] = laptime;
+                jsonData = JSON.stringify(jsonData);
 
-            //return when the input button is clicked
-            $.ajax({
-                type: 'POST',
-                url: url + '/api/update-session',
-                data: jsonData,
-                success: function (data) {
-                    console.log('click');
-                }
-            });
+                //return when the input button is clicked
+                $.ajax({
+                    type: 'POST',
+                    url: url + '/api/update-session',
+                    data: jsonData,
+                    success: function (data) {
+                        console.log('click');
+                    }
+                });
+            }
+
             toggleInput();
         }
 
