@@ -1,16 +1,18 @@
 @extends('layout')
 
 @section('content')
-
+<div class="control-panel-wrapper">
     <h1>Control panel</h1>
     <div class="individual-buttons">
-        <input type="button" value="1" onclick="sendUpdate(1)">
-        <input type="button" value="2" onclick="sendUpdate(2)">
-        <input type="button" value="3" onclick="sendUpdate(3)">
-        <input type="button" value="4" onclick="sendUpdate(4)">
+        <label>Toggle induvidual devices:</label>
+        <input class="btn btn-primary" type="button" value="1" onclick="sendUpdate(1)">
+        <input class="btn btn-primary" type="button" value="2" onclick="sendUpdate(2)">
+        <input class="btn btn-primary" type="button" value="3" onclick="sendUpdate(3)">
+        <input class="btn btn-primary" type="button" value="4" onclick="sendUpdate(4)">
     </div>
+    <hr>
     <div class="devices-wrapper">
-        <label for="devices">Amount of devices</label>
+        <label for="devices">Amount of devices:</label>
         <select id="devices" class="devices">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -18,16 +20,21 @@
             <option selected value="4">4</option>
         </select>
     </div>
-    <hr>
-    <div>
-        <label>Iteraties</label><input class="iteration" type="number" value="1">
-        <label>Interval</label><input class="interval" type="number" value="0">
-        <input id="startButton" type="button" value="start" onclick="startSession()">
-    </div>
+    <div class="session-wrapper">
+        <div>
+            <label>Iteraties</label>
+            <input class="iteration" type="number" value="1">
+        </div>
+        <div>
+            <label>Interval</label>
+            <input class="interval" type="number" value="0">
+        </div>
+        <input class="btn btn-primary" id="startButton" type="button" value="start" onclick="startSession()">
     <div>
         <h3>Times</h3>
         <ul class="laptimes"></ul>
     </div>
+</div>
 <script>
     const url = '{{ url('/') }}';
 
@@ -102,5 +109,5 @@
     }
 
 </script>
-    
+
 @endsection
