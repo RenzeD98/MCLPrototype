@@ -28,6 +28,10 @@
         <label>Interval  </label><input class="interval" type="number" value="0"><br>
         <input id="startButton" type="button" value="start" onclick="startSession()">
     </div>
+    <div>
+        <h3>Times</h3>
+        <ul class="laptimes"></ul>
+    </div>
 <script>
     const url = '{{ url('/') }}';
 
@@ -42,6 +46,11 @@
     //listen to event
     channel.bind('toggleStartButton', function (data) {
         enableButtons();
+    });
+
+    channel.bind('laptimes', function (data) {
+        let laptime = data.laptime;
+        appendLapTime(laptime);
     });
 
     function sendUpdate(id) {
@@ -83,6 +92,12 @@
     function enableButtons() {
         let buttons = $(':button');
         buttons.prop('disabled', false);
+    }
+
+    function appendLapTime(laptime) {
+        let li = document.createElement('li');
+        li.innerText = laptime
+        $('.laptimes').append(li);
     }
 
 </script>

@@ -49,13 +49,14 @@ class PusherController extends Controller
     public function recieveSessionUpdate(Request $request){
         // json decode request
         $request = json_decode($request->getContent());
-        
+
         $iterations = $request->iterations;
         $interval = $request->interval;
         $i = $request->i + 1;
         $laptime = $request->laptime;
 
         //send laptime to controlpanel
+        Pusher::trigger('MCL_prototype', 'laptimes', ['laptime' => $laptime]);
 
         $this->sessionUpdate($iterations, $interval, $i);
     }
