@@ -85,7 +85,7 @@
     function returnInput() {
         stopwatch.stop();
         let laptime = stopwatch.lap();
-        stopwatch.clear();
+        stopwatch.reset();
 
         jsonData = JSON.parse(jsonData);
         jsonData['laptime'] = laptime;

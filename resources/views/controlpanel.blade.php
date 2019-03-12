@@ -66,6 +66,9 @@
     
     function startSession() {
         console.log('startSession');
+
+        $('.laptimes').empty();
+
         let iterations = $('.iteration').val();
         let interval = $('.interval').val();
 
