@@ -41,14 +41,15 @@ class PusherController extends Controller
             }
 
             Pusher::trigger('MCL_prototype', $channel, ['message' => $data]);
+        } else {
+            Pusher::trigger('MCL_prototype', 'toggleStartButton', ['message' => 'oh hallo']);
         }
     }
 
     public function recieveSessionUpdate(Request $request){
         // json decode request
         $request = json_decode($request->getContent());
-
-
+        
         $iterations = $request->iterations;
         $interval = $request->interval;
         $i = $request->i + 1;
