@@ -10,7 +10,7 @@
     </div>
 
     <button disabled id="inputButton" class="inputButtonContainer redBackground" style="display: none" onclick="returnInput()">
-        <div class="stopwatch"></div>
+        <div style="display: none" class="stopwatch"></div>
     </button>
 
     <script src="{{ URL::asset('js/timer.js') }}"></script>
@@ -51,11 +51,23 @@
                 inputButton.removeClass("redBackground");
 
                 //start timer
+                toggleStopwatch('start');
                 stopwatch.start();
             } else {
+                toggleStopwatch('stop');
                 inputButton.prop('disabled', true);
                 inputButton.addClass("redBackground");
                 inputButton.removeClass("greenBackground");
+            }
+        }
+
+        function toggleStopwatch(status) {
+            let stopwatch = $('.stopwatch');
+
+            if(status === 'start') {
+                stopwatch.css('display', 'initial')
+            } else {
+
             }
         }
 
