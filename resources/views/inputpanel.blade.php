@@ -58,6 +58,9 @@
                 inputButton.prop('disabled', true);
                 inputButton.addClass("redBackground");
                 inputButton.removeClass("greenBackground");
+
+                stopwatch.stop();
+                stopwatch.reset();
             }
         }
 
@@ -72,9 +75,9 @@
         }
 
         function returnInput() {
-            stopwatch.stop();
+
             let laptime = stopwatch.lap();
-            stopwatch.reset();
+            toggleInput();
 
             if (jsonData !== 'red') {
                 jsonData = JSON.parse(jsonData);
@@ -92,7 +95,7 @@
                 });
             }
 
-            toggleInput();
+
         }
 
     </script>
