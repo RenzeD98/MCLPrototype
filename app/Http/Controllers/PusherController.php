@@ -59,7 +59,7 @@ class PusherController extends Controller
                 'devices' => $devices
             ));
 
-            if ($i !== 1) {
+            if ($i !== 0) {
                 sleep($interval);
             }
 
