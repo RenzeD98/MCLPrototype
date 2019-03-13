@@ -19,9 +19,13 @@
         let jsonData = null;
         const url = '{{ url('/') }}';
 
-        //Set audio element
-        let audioElement = document.createElement('audio');
-        audioElement.setAttribute('src', 'sound/beep.mp3');
+        //Set audio elements
+        let beep = document.createElement('audio');
+        beep.setAttribute('src', 'sound/beep.mp3');
+        beep.volume = 0.1;
+
+        let ping = document.createElement('audio');
+        ping.setAttribute('src', 'sound/ping.mp3');
 
         //Set channel id to listen to
         function setChannel(id) {
@@ -53,7 +57,7 @@
             if (inputButton.prop('disabled')) {
                 inputButton.prop('disabled', false);
 
-                audioElement.play();
+                beep.play();
                 inputButton.addClass("greenBackground");
                 inputButton.removeClass("redBackground");
 
@@ -61,6 +65,8 @@
                 toggleStopwatch('start');
                 stopwatch.start();
             } else {
+                ping.play();
+
                 stopwatch.stop();
                 stopwatch.reset();
 
