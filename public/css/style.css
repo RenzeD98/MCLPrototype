@@ -67,3 +67,8 @@ html, body{
     background: linear-gradient(180deg, #F33939 0%, #D60000 100%), #AF0101;
 }
 
+.device-number {
+    padding: 20px 30px;
+    margin: 5px;
+}
+
