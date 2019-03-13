@@ -19,6 +19,10 @@
         let jsonData = null;
         const url = '{{ url('/') }}';
 
+        //Set audio element
+        let audioElement = document.createElement('audio');
+        audioElement.setAttribute('src', 'sound/beep.mp3');
+
         //Set channel id to listen to
         function setChannel(id) {
             // open connection to channel
@@ -49,6 +53,7 @@
             if (inputButton.prop('disabled')) {
                 inputButton.prop('disabled', false);
 
+                audioElement.play();
                 inputButton.addClass("greenBackground");
                 inputButton.removeClass("redBackground");
 
@@ -99,7 +104,6 @@
 
         //return the input back to the api
         function returnInput() {
-
             let laptime = stopwatch.lap();
             toggleInput();
 
@@ -118,8 +122,6 @@
                     }
                 });
             }
-
-
         }
 
     </script>
