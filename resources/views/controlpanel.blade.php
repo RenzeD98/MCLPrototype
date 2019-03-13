@@ -23,11 +23,11 @@
     <div class="session-wrapper">
         <div>
             <label>Iteraties</label>
-            <input class="iteration" type="number" value="1">
+            <input class="iteration" type="number" value="5" min="1">
         </div>
         <div>
             <label>Interval</label>
-            <input class="interval" type="number" value="0">
+            <input class="interval" type="number" value="2" min="1">
         </div>
     </div>
     <input class="btn btn-primary" id="startButton" type="button" value="start" onclick="startSession()">
@@ -78,20 +78,25 @@
         let interval = $('.interval').val();
         let devices = $('.devices').val();
 
-        disableButtons();
+        if(interval <= 0 || iterations <= 0) {
+            alert('Iterations or Interval is lower than 1');
+        } else {
 
-        $.ajax({
-            type: 'POST',
-            url: url + '/api/start-session',
-            data: {
-                iterations: iterations,
-                interval: interval,
-                devices: devices
-            },
-            success: function(){
-                console.log('verstuurd');
-            }
-        });
+            disableButtons();
+
+            $.ajax({
+                type: 'POST',
+                url: url + '/api/start-session',
+                data: {
+                    iterations: iterations,
+                    interval: interval,
+                    devices: devices
+                },
+                success: function () {
+                    console.log('verstuurd');
+                }
+            });
+        }
     }
 
     function disableButtons() {

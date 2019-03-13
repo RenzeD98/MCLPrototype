@@ -10,7 +10,7 @@
     </div>
 
     <button disabled id="inputButton" class="inputButtonContainer redBackground" style="display: none" onclick="returnInput()">
-        <div style="display: none" class="stopwatch"></div>
+        <div style="visibility: hidden" class="stopwatch"></div>
     </button>
 
     <script src="{{ URL::asset('js/timer.js') }}"></script>
@@ -69,26 +69,30 @@
             let stopwatch = $('.stopwatch');
 
             if(status === 'start') {
-                stopwatch.css('display', 'initial')
+                stopwatch.css('visibility', 'visible');
             } else {
-
-                stopwatch.each(function() {
-                    var elem = $(this);
-                    // count the blinks
-                    var count = 1;
-                    var intervalId = setInterval(function() {
-                        if (elem.css('visibility') == 'visible') {
-                            elem.css('visibility', 'hidden');
-                            // increment counter when showing to count # of blinks and stop when visible
-                            if (count++ === 4) {
-                                clearInterval(intervalId);
-                            }
-                        } else {
-                            elem.css('visibility', 'visible');
-                        }
-                    }, 300);
-                });
+                stopwatchAnimationToggle(stopwatch);
             }
+        }
+
+        function stopwatchAnimationToggle(stopwatch){
+            stopwatch.each(function() {
+                var elem = $(this);
+                // count the blinks
+                var count = 1;
+
+                var intervalId = setInterval(function() {
+                    if (elem.css('visibility') == 'visible') {
+                        elem.css('visibility', 'hidden');
+                        // increment counter when showing to count # of blinks and stop when visible
+                        if (count++ === 3) {
+                            clearInterval(intervalId);
+                        }
+                    } else {
+                        elem.css('visibility', 'visible');
+                    }
+                }, 200);
+            });
         }
 
         function returnInput() {
