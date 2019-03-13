@@ -3,10 +3,10 @@
 @section('content')
 
     <div class="settings">
-        <input type="button" value="1" onclick="setChannel(1)">
-        <input type="button" value="2" onclick="setChannel(2)">
-        <input type="button" value="3" onclick="setChannel(3)">
-        <input type="button" value="4" onclick="setChannel(4)">
+        <input type="button" class="btn btn-primary device-number" value="1" onclick="setChannel(1)">
+        <input type="button" class="btn btn-primary device-number" value="2" onclick="setChannel(2)">
+        <input type="button" class="btn btn-primary device-number" value="3" onclick="setChannel(3)">
+        <input type="button" class="btn btn-primary device-number" value="4" onclick="setChannel(4)">
     </div>
 
     <button disabled id="inputButton" class="inputButtonContainer redBackground" style="display: none" onclick="returnInput()">
