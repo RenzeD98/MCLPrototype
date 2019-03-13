@@ -19,6 +19,7 @@
         let jsonData = null;
         const url = '{{ url('/') }}';
 
+        //Set channel id to listen to
         function setChannel(id) {
             // open connection to channel
             var pusher = new Pusher('298ef029374f89470d24', {
@@ -41,6 +42,7 @@
             });
         }
 
+        //toggle the userinterface
         function toggleInput() {
             //toggle the state of the inputButton
             let inputButton = $('#inputButton');
@@ -91,6 +93,7 @@
             }
         }
 
+        //return the input back to the api
         function returnInput() {
 
             let laptime = stopwatch.lap();

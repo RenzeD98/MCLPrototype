@@ -45,19 +45,21 @@
         cluster: 'eu'
     });
 
-    //subscribe to a channel
+    //subscribe to a channelgroup
     let channel = pusher.subscribe('MCL_prototype');
 
-    //listen to event
+    //listen to channels in channelgroup
     channel.bind('toggleStartButton', function (data) {
         enableButtons();
     });
-
     channel.bind('laptimes', function (data) {
         let laptime = data.laptime;
         appendLapTime(laptime);
     });
 
+    /**
+     * Send an update back to the api
+     */
     function sendUpdate(id) {
         $.ajax({
             type: 'POST',
@@ -69,6 +71,9 @@
         });
     }
 
+    /**
+     * Start a session
+     */
     function startSession() {
         console.log('startSession');
 
@@ -94,16 +99,27 @@
         });
     }
 
+    /**
+     * Disable buttons on the control panel
+     */
     function disableButtons() {
         let buttons = $(':button');
         buttons.prop('disabled', true);
     }
 
+    /**
+     * Enable buttons on the control panel
+     */
     function enableButtons() {
         let buttons = $(':button');
         buttons.prop('disabled', false);
     }
 
+    /**
+     * Add laptime to list
+     *
+     * @param laptime
+     */
     function appendLapTime(laptime) {
         let li = document.createElement('li');
         li.innerText = laptime;
