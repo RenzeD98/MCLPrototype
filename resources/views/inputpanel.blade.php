@@ -54,13 +54,14 @@
                 toggleStopwatch('start');
                 stopwatch.start();
             } else {
+                stopwatch.stop();
+                stopwatch.reset();
+
                 toggleStopwatch('stop');
+
                 inputButton.prop('disabled', true);
                 inputButton.addClass("redBackground");
                 inputButton.removeClass("greenBackground");
-
-                stopwatch.stop();
-                stopwatch.reset();
             }
         }
 
@@ -71,6 +72,22 @@
                 stopwatch.css('display', 'initial')
             } else {
 
+                stopwatch.each(function() {
+                    var elem = $(this);
+                    // count the blinks
+                    var count = 1;
+                    var intervalId = setInterval(function() {
+                        if (elem.css('visibility') == 'visible') {
+                            elem.css('visibility', 'hidden');
+                            // increment counter when showing to count # of blinks and stop when visible
+                            if (count++ === 4) {
+                                clearInterval(intervalId);
+                            }
+                        } else {
+                            elem.css('visibility', 'visible');
+                        }
+                    }, 300);
+                });
             }
         }
 
